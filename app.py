@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/hello', methods=['GET'])
+@app.route('/', methods=['GET'])
 
 def hello():
     return "Hello Flask!"
@@ -18,7 +18,7 @@ def hello():
 def search_location():
     search = request.args.get('search')
     print("search::::::::**********", search)
-    db_path = os.environ.get("DATABASE_PATH")
+    db_path = os.environ.get("DATABASE_URL")
     with sqlite3.connect(db_path) as location:
         cursor = location.cursor()
         cursor.execute(f'SELECT DISTINCT zc.code, zc.city, zc.lat, zc.lon, st.name as state_name, coun.name as country_name FROM zipcodes zc INNER JOIN states st \
